@@ -4,18 +4,20 @@ import {
   IconFinder,
   IconGithub,
   IconGitlab,
+  IconHarvard,
   IconLinked,
   IconResume,
   IconThree,
 } from "src/icons";
 import { LinkCard } from "../../shared/link-card";
 import { LinkCardButton } from "../../shared/link-card-button";
-import { AboutWindow, Logo3DWindow, ResumeWindow } from "../windows";
+import { AboutWindow, CS50Window, Logo3DWindow, ResumeWindow } from "../windows";
 
 export const DOCK_WINDOWS = {
   ABOUT_ME: "ABOUT_ME",
   RESUME: "RESUME",
   THREE: "THREE",
+  CS50: "CS50",
 };
 
 export const DOCK_EXTERNAL_LINKS = {
@@ -50,6 +52,19 @@ export const dockItems = [
     ),
     window: () => <ResumeWindow key={DOCK_WINDOWS.RESUME} />,
     id: DOCK_WINDOWS.RESUME,
+  },
+  {
+    component: (onClick: () => void, key: string, active: boolean) => (
+      <LinkCardButton
+        icon={<IconHarvard />}
+        onClick={onClick}
+        key={key}
+        active={active}
+        title="CS50w"
+      />
+    ),
+    window: () => <CS50Window key={DOCK_WINDOWS.CS50} />,
+    id: DOCK_WINDOWS.CS50,
   },
   {
     component: (onClick: () => void, key: string, active: boolean) => (
