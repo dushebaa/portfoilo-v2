@@ -64,7 +64,6 @@ export const useDrag = ({
 
   const handleMouseUp = (evt: Event) => {
     evt.preventDefault();
-    console.log("Mouseup");
     setIsDragging(false);
   };
 
@@ -114,7 +113,7 @@ export const useDrag = ({
       if (!draggableElement) return;
 
       let clientX, clientY;
-      if (evt instanceof TouchEvent) {
+      if (window.TouchEvent && evt instanceof TouchEvent) {
         evt.stopPropagation();
         [clientX, clientY] = [
           evt.touches?.[0].clientX,

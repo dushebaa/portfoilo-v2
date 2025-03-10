@@ -4,9 +4,9 @@ import { DOCK_WINDOWS } from "../dock";
 const AboutWindow = () => (
   <DraggableWindow id={DOCK_WINDOWS.ABOUT_ME}>
     <div className="desktop__textbox">Artem Dusheba</div>
-    <div className="desktop__textbox desktop__textbox-medium">Solidity dev</div>
+    <div className="desktop__textbox desktop__textbox-medium">Fullstack dev</div>
     <div className="desktop__textbox desktop__textbox-small">
-      sometimes doing fullstack things in react + node.js
+      Nest.js, React, Typescript, Golang, Solidity
     </div>
   </DraggableWindow>
 );
