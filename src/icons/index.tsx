@@ -6,3 +6,4 @@ export { default as IconScrollDown } from "./IconScrollDown";
 export { default as IconFinder } from "./IconFinder";
 export { default as IconThree } from "./IconThree";
 export { default as IconHarvard } from "./IconHarvard";
+export { default as IconTerminal } from "./IconTerminal";

@@ -177,6 +177,7 @@
 .desktop__dock {
   position: absolute;
   bottom: 0;
+  z-index: 50;
 }
 .desktop__dock > svg {
   width: 30px;
@@ -184,4 +185,13 @@
 }
 .desktop__dock > svg:hover {
   fill: #fff;
+}
+
+.desktop__terminal-wrapper #terminalEditor {
+  min-height: 320px;
+  overflow-y: hidden;
+}
+
+.desktop__terminal-wrapper #terminalEditor {
+  padding: 0;
 }

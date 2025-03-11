@@ -6,6 +6,7 @@ interface WindowState {
   expanded: boolean;
   width: number;
   height: number;
+  focused: boolean;
 }
 
 interface DraggableWindowsState {
@@ -15,13 +16,21 @@ interface DraggableWindowsState {
 interface DraggableWindowsStore {
   windows: DraggableWindowsState;
   toggle: (id: string) => void;
-  expand: (id: string) => void;
+  expand: (id: string, expand?: boolean) => void;
+  focus: (id: string) => void;
   visible: (id: string) => boolean;
   expanded: (id: string) => boolean;
+  focused: (id: string) => boolean;
 }
 
 const initialWindowsState: DraggableWindowsState = {
-  [DOCK_WINDOWS.ABOUT_ME]: { visible: true, expanded: false, width: 0, height: 0 },
+  [DOCK_WINDOWS.ABOUT_ME]: {
+    visible: true,
+    focused: false,
+    expanded: false,
+    width: 0,
+    height: 0,
+  },
 };
 
 const useDraggableWindows = create<DraggableWindowsStore>((set, get) => ({
@@ -33,14 +42,28 @@ const useDraggableWindows = create<DraggableWindowsStore>((set, get) => ({
         [id]: { ...state.windows[id], visible: !state.windows[id]?.visible },
       },
     })),
-  expand: (id: string) =>
+  expand: (id: string, expand?: boolean) =>
     set((state) => ({
       windows: {
         ...state.windows,
-        [id]: { ...state.windows[id], expanded: !state.windows[id]?.expanded },
+        [id]: {
+          ...state.windows[id],
+          expanded:
+            expand === undefined ? !state.windows[id]?.expanded : expand,
+        },
       },
     })),
+  focus: (id: string) =>
+    set((state) => {
+      const newState: DraggableWindowsStore = { ...state };
+      Object.keys(state.windows).forEach((windowKey: string) => {
+        newState.windows[windowKey].focused = false;
+      });
+      newState.windows[id].focused = true;
+      return newState;
+    }),
 
+  focused: (id: string) => get().windows[id]?.focused || false,
   visible: (id: string) => get().windows[id]?.visible || false,
   expanded: (id: string) => get().windows[id]?.expanded || false,
 }));
