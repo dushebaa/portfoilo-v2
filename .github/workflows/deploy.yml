@@ -46,6 +46,9 @@ jobs:
           name: build-files
           path: ./dist
 
+      - name: Debug dist dir
+        run: ls -R ./dist
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
