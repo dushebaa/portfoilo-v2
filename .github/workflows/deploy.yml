@@ -31,25 +31,39 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build
-        run: yarn build
-
-      - name: Debug dist contents
         run: |
-          echo "Contents of dist:"
+          yarn build
+          echo "Deployed $(date) - Run ${{ github.run_id }}" > dist/deploy-timestamp.txt
+
+      - name: Debug dist
+        run: |
+          echo "dist contents:"
           ls -la dist
-          echo "Full file tree of dist:"
-          find dist -type f
+          echo "dist/index.html:"
+          cat dist/index.html
+
+      - name: Overwrite root with dist
+        run: |
+          # Clear everything except dist
+          find . -maxdepth 1 -not -name 'dist' -not -name '.' -not -name '..' -exec rm -rf {} +
+          # Move dist contents to root
+          mv dist/* .
+          rm -rf dist
+          echo "Root contents after move:"
+          ls -la
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: .
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4.0.5
+        with:
+          timeout: 60000
+          error_count: 5
 
       - name: Debug deployment
         run: |
           echo "Deployed URL: ${{ steps.deployment.outputs.page_url }}"
-          echo "Deployment ID: ${{ steps.deployment.outputs.id }}"
