@@ -37,7 +37,7 @@ jobs:
         run: yarn build
 
       - name: Delete everything except dist folder
-        run: rm -r $(ls -A | grep -v dist _site)
+        run: rm -r $(ls -A | grep -v -E "dist|_*")
 
       - name: Move dist folder contents to root and delete dist
         run: cp -a dist/* . && rm -rf dist
