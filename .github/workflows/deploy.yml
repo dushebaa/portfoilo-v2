@@ -3,51 +3,41 @@ name: Deploy static content to Pages
 on:
   push:
     branches: ["main"]
-  workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
-  deploy:
+  build:
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744  # v3
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
       - name: Set up Node
-        uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7  # v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: "yarn"
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+
       - name: Build
-        run: |
-          yarn build
-          echo "Deployed $(date) - Run ${{ github.run_id }}" > dist/deploy-timestamp.txt
-      - name: Debug dist
-        run: |
-          echo "dist contents:"
-          ls -la dist
-          echo "dist/index.html:"
-          cat dist/index.html
-      - name: Manual artifact upload
-        run: |
-          zip -r github-pages.zip dist
-          curl -L \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/zip" \
-            --data-binary @github-pages.zip \
-            "https://uploads.github.com/repos/${{ github.repository }}/actions/artifacts?name=github-pages&run_id=${{ github.run_id }}"
+        run: yarn build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@f27bcc15848fdcdcc02f01754eb838e44bcf389b  # v1
+        uses: actions/deploy-pages@v4.0.5
