@@ -37,7 +37,7 @@ jobs:
         run: yarn build
 
       - name: Delete everything except dist folder
-        run: shopt -s extglob && rm -r !(dist|_*)
+        run: shopt -s extglob && rm -r ^(dist|_*)
 
       - name: Move dist folder contents to root and delete dist
         run: cp -a dist/* . && rm -rf dist
