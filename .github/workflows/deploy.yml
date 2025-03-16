@@ -36,11 +36,9 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Clean up and prepare artifact
+      - name: Clean up except dist and _* folders
         run: |
-          # Delete all directories except dist and those starting with _
-          find . -maxdepth 1 -type d -not -name 'dist' -not -name '_*' -not -name '.' -exec rm -rf {} +
-        shell: bash
+          find . -maxdepth 1 -not -name 'dist' -not -name '_*' -not -name '.' -exec rm -rf {} +
 
       - name: Debug
         run: ls
@@ -49,6 +47,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
+          path: dist
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
