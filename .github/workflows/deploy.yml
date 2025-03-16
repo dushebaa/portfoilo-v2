@@ -36,14 +36,17 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Debug Build Output
-        run: ls -R ./dist
+      - name: Debug
+        run: ls
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
           path: "./dist"
+
+      - name: Change directory to dist
+        run: cd ./dist
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
