@@ -46,9 +46,6 @@ jobs:
           name: github-pages
           path: dist
 
-      - name: Debug
-        run: ls
-      
       - name: Copy dist contents
         run: |
           cp -a dist/* . && rm -rf dist
