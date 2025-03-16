@@ -40,14 +40,18 @@ jobs:
         run: |
           find . -maxdepth 1 -not -name 'dist' -not -name '_*' -not -name '.' -exec rm -rf {} +
 
-      - name: Debug
-        run: ls
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
           path: dist
+
+      - name: Debug
+        run: ls
+      
+      - name: Copy dist contents
+        run: |
+          cp -a dist/* . 
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
