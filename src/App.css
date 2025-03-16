@@ -74,7 +74,7 @@
 }
 
 .desktop__draggable-expanded {
-  width: 100vw !important; 
+  width: 100vw !important;
   height: calc(100dvh - 65px) !important;
   transition: all 0.2s ease-in;
   z-index: 5;
