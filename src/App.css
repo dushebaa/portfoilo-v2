@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "Playwrite CU";
+  font-style: normal;
+  src: url("./assets/Playwrite-CU.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  src: url("./assets/OpenSans-Regular.woff2") format("woff2");
+}
+
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
