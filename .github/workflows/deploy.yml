@@ -37,7 +37,7 @@ jobs:
         run: yarn build
 
       - name: Delete everything except dist folder
-        run: shopt -s extglob && rm -r ^(dist|_*)
+        run: find . -mindepth 1 -not -name 'dist' -not -name '_*' -exec rm -rf {} +
 
       - name: Move dist folder contents to root and delete dist
         run: cp -a dist/* . && rm -rf dist
