@@ -36,14 +36,12 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Delete everything except dist folder
+      - name: Clean up and prepare artifact
         run: |
-          ls -d */ | grep -v '^dist/' | grep -v '^_.*' | xargs rm -rf
+          # Delete all directories except dist and those starting with _
+          find . -maxdepth 1 -type d -not -name 'dist' -not -name '_*' -not -name '.' -exec rm -rf {} +
         shell: bash
 
-      - name: Move dist folder contents to root and delete dist
-        run: cp -a dist/* . && rm -rf dist
-      
       - name: Debug
         run: ls
 
