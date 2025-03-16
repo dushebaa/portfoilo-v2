@@ -33,10 +33,23 @@ jobs:
       - name: Build
         run: yarn build
 
+      - name: Debug dist contents
+        run: |
+          echo "Contents of dist:"
+          ls -la dist
+          echo "Full file tree of dist:"
+          find dist -type f
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4.0.5
+
+      - name: Debug deployment
+        run: |
+          echo "Deployed URL: ${{ steps.deployment.outputs.page_url }}"
+          echo "Deployment ID: ${{ steps.deployment.outputs.id }}"
