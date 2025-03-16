@@ -36,17 +36,17 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Debug
-        run: ls
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
           path: "./dist"
 
-      - name: Change directory to dist
-        run: cd ./dist
+      - name: Delete everything except dist folder
+        run: rm -r $(ls -A | grep -v dist)
+
+      - name: Move dist folder contents to root and delete dist
+        run: cp -a dist/* . && rm -rf dist
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
