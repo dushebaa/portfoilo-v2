@@ -1,8 +1,6 @@
-# Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
 
@@ -13,7 +11,6 @@ permissions:
 
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -36,22 +33,10 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Clean up except dist and _* folders
-        run: |
-          find . -maxdepth 1 -not -name 'dist' -not -name '_*' -not -name '.' -exec rm -rf {} +
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: github-pages
           path: dist
-
-      - name: Copy dist contents
-        run: |
-          cp -a dist/* . && rm -rf dist
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4.0.5
