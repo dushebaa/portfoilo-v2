@@ -9,5 +9,5 @@ export default defineConfig({
       src: "/src",
     },
   },
-  base: "/portfoilo-v2/",
+  base: "/",
 });
