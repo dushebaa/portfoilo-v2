@@ -2,12 +2,11 @@
   "frame": {
     "name": "Bad App",
     "version": "1",
-    "iconUrl": "https://dushebaa.github.io/portfoilo-v2/icon.png",
-    "homeUrl": "https://dushebaa.github.io/portfoilo-v2",
-    "imageUrl": "https://dushebaa.github.io/portfoilo-v2/image.png",
-    "splashImageUrl": "https://dushebaa.github.io/portfoilo-v2/splash.png",
+    "iconUrl": "https://dushebaa.github.io/favicon.svg",
+    "homeUrl": "https://dushebaa.github.io",
+    "imageUrl": "https://dushebaa.github.io/favicon.svg",
+    "splashImageUrl": "https://dushebaa.github.io/favicon.svg",
     "splashBackgroundColor": "#53e695",
-    "webhookUrl": "https://dushebaa.github.io/portfoilo-v2/api/webhook",
     "subtitle": "A very bad app",
     "description": "Too many things to write here ",
     "primaryCategory": "games"
