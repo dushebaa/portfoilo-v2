@@ -11,5 +11,10 @@
     "subtitle": "A very bad app",
     "description": "Too many things to write here ",
     "primaryCategory": "games"
+  },
+  "accountAssociation": {
+    "header": "eyJmaWQiOjE4NDU4NDgsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHg5NDRENjI3QjExMTRCMDQyMGUwRDYwMzNhOTdEMzA4N0EzNzgwNWQ4In0",
+    "payload": "eyJkb21haW4iOiJkdXNoZWJhYS5naXRodWIuaW8ifQ",
+    "signature": "Ddgy82Fw2TojqnjrQRBlnrwWz63tIhsFwYKpj3yHHEtX96OJGNlj58n7uGauRxECQ//oCBEK28XSJrZeLcqLNhw="
   }
 }
